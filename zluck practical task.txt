@@ -1,0 +1,183 @@
+1. Make a two-player Rock-Paper-Scissors game against the computer, instead of taking
+input from the user, have your own static variable.
+For e.g., input: rock, and computer guess: scissor
+output: ‘You win!’
+
+answer
+============
+const playerChoice = "rock"; 
+function getComputerChoice() {
+  const choices = ["rock", "paper", "scissors"];
+  const randomIndex = Math.floor(Math.random() * choices.length);
+  return choices[randomIndex];
+}
+const winConditions = {
+  rock: "scissors", 
+  paper: "rock",  
+  scissors: "paper" 
+};
+function determineWinner(player, computer) {
+  if (player === computer) {
+    return "It's a draw!";
+  }
+  if (winConditions[player] === computer) {
+    return "You win!";
+  }
+  return "You lose!";
+}
+const computerChoice = getComputerChoice();
+console.log(`Player choice: ${playerChoice}`);
+console.log(`Computer choice: ${computerChoice}`);
+console.log(determineWinner(playerChoice, computerChoice));
+
+output
+====
+Player choice: rock
+Computer choice: paper
+You lose!
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------
+
+
+
+2.Write a program to check whether a given string/number is palindrome or not.
+For e.g., input 24, input: 181
+output: false output: true
+
+
+answer 
+=============
+function isPalindrome(input) {
+  const str = input.toString();
+  const reversedStr = str.split('').reverse().join('');
+  return str === reversedStr;
+}
+const test1 = 24;
+const test2 = 181;
+console.log(`Input: ${test1}, Output: ${isPalindrome(test1)}`); 
+console.log(`Input: ${test2}, Output: ${isPalindrome(test2)}`); 
+
+
+output 
+=========
+Input: 24, Output: false
+Input: 181, Output: true
+
+
+
+
+-------------------------------------------------------------------
+
+
+
+3. Write a program that prints two arrays with smallest, and largest numbers from an array.
+Take a midpoint number from the sorted array of a given array, to determine the
+smallest and largest number. Also, check for duplicates
+For e.g., input: [9,6,7,5,0,3] -> 6 will be the midpoint
+output: smallest: [0, 3, 5]
+largest: [6, 7, 9]
+
+answer
+========
+function splitArray(arr) {
+  const uniqueArr = [...new Set(arr)].sort((a, b) => a - b);
+  const midIndex = Math.floor(uniqueArr.length / 2);
+  const midpoint = uniqueArr[midIndex];
+  const smallest = uniqueArr.slice(0, midIndex);
+  const largest = uniqueArr.slice(midIndex);
+  return { smallest, largest };
+}
+const input = [9, 6, 7, 5, 0, 3];
+const result = splitArray(input);
+console.log(`Input: ${input}`);
+console.log(`Smallest: ${result.smallest}`);
+console.log(`Largest: ${result.largest}`);
+
+
+output 
+======
+Input: [9, 6, 7, 5, 0, 3]
+Smallest: [0, 3, 5]
+Largest: [6, 7, 9]
+
+--------------------------------------------------------------------------
+
+
+
+
+4. We’ll have an array of objects which will include 5 student’s names, 3 subject
+marks(English, Science, Maths) each. Result should be the same array, but calculated
+percentage wise. Student with Highest percentage should be on top.
+
+
+answer 
+=========
+function calculateAndSortStudents(students) {
+  students.forEach(student => {
+    const totalMarks = student.English + student.Science + student.Maths;
+    const percentage = (totalMarks / 300) * 100;
+    student.percentage = percentage.toFixed(2);
+  });
+  students.sort((a, b) => b.percentage - a.percentage);
+  return students;
+}
+const students = [
+  { name: "Alice", English: 85, Science: 90, Maths: 80 },
+  { name: "Bob", English: 75, Science: 70, Maths: 60 },
+  { name: "Charlie", English: 95, Science: 85, Maths: 100 },
+  { name: "Daisy", English: 65, Science: 60, Maths: 70 },
+  { name: "Ethan", English: 80, Science: 75, Maths: 85 },
+];
+const sortedStudents = calculateAndSortStudents(students);
+console.log("Sorted Students by Percentage:");
+console.log(sortedStudents);
+
+output
+====
+Sorted Students by Percentage:
+[
+  {
+    name: 'Charlie',
+    English: 95,
+    Science: 85,
+    Maths: 100,
+    percentage: '93.33'
+  },
+  {
+    name: 'Alice',
+    English: 85,
+    Science: 90,
+    Maths: 80,
+    percentage: '85.00'
+  },
+  {
+    name: 'Ethan',
+    English: 80,
+    Science: 75,
+    Maths: 85,
+    percentage: '80.00'
+  },
+  {
+    name: 'Bob',
+    English: 75,
+    Science: 70,
+    Maths: 60,
+    percentage: '68.33'
+  },
+  {
+    name: 'Daisy',
+    English: 65,
+    Science: 60,
+    Maths: 70,
+    percentage: '65.00'
+  }
+]
+
+=== Code Execution Successful ===
